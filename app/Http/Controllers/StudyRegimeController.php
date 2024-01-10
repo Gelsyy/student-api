@@ -12,7 +12,8 @@ class StudyRegimeController extends Controller
      */
     public function index()
     {
-        //
+        $study_regimen=Study_Regimen::all();
+        return response()->json($study_regimen);
     }
 
     /**
@@ -28,7 +29,14 @@ class StudyRegimeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $study_regimen=new Study_Regimen;
+        $study_regimen->regimen_estudio=$request->regimen_estudio;
+        $study_regimen->save();
+        $data=[
+            'message'=>'el regimen de estudio ha sido creado',
+            'regimen de estudio'=>$faculty
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -52,7 +60,13 @@ class StudyRegimeController extends Controller
      */
     public function update(Request $request, Study_Regime $study_Regime)
     {
-        //
+        $study_regimen->regimen_estudio=$request->regimen_estudio;
+        $study_regimen->save();
+        $data=[
+            'message'=>'el regimend de estudio ha sido modificado',
+            'regimen de estudio'=>$study_regimen
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -60,6 +74,11 @@ class StudyRegimeController extends Controller
      */
     public function destroy(Study_Regime $study_Regime)
     {
-        //
+        $study_regimen->delete();
+        $data=[
+            'message'=>'el regimen de estudio ha sido eliminado',
+            'regimen de estudio'=>$study_regimen
+        ];
+        return response()->json($data);
     }
 }

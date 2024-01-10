@@ -1,18 +1,43 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+     //devuelve los nombres de los estudiantes becados 
+     public function getBecadoStudentsNames()
+     {
+         $becadoStudentsNames = DB::table('students')
+             ->join('student__types', 'students.tipo_estudiante_id', '=', 'student__types.id')
+             ->where('student__types.tipo_estudiante', 'becado')
+             ->select('students.nombre', 'students.apellido', 'students.carrera')
+             ->get();
+ 
+         return $becadoStudentsNames;
+     }
+
+     // devuelve los estudiantes
+     public function getStudentsByYearAndGroup($annio, $grupo)
+    {
+        $students = Student::where('annio', $annio)
+                           ->where('grupo', $grupo)
+                           ->pluck('nombre');
+
+        return $students;
+    }
+
+
+
+    
+   //muestra todos los estudiantes
     public function index()
     {
-        //
+        $student=Student::all();
+        return response()->json( $student);
     }
 
     /**
@@ -60,6 +85,11 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        $data=[
+            'message'=>'el estudiante ha sido eliminado',
+            'facultad'=>$student
+        ];
+        return response()->json($data);
     }
 }

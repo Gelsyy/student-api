@@ -12,7 +12,8 @@ class MunicipalityController extends Controller
      */
     public function index()
     {
-        //
+        $municipality=Municipality::all();
+        return response()->json($municipality);
     }
 
     /**
@@ -28,7 +29,7 @@ class MunicipalityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -60,6 +61,12 @@ class MunicipalityController extends Controller
      */
     public function destroy(Municipality $municipality)
     {
-        //
+        
+        $municipality>delete();
+        $data=[
+            'message'=>'el municipio ha sido eliminado',
+            'municipio'=>$municipality
+        ];
+        return response()->json($data);
     }
 }

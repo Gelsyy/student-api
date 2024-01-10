@@ -7,12 +7,11 @@ use Illuminate\Http\Request;
 
 class ProvinceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
-        //
+        $province=Province::all();
+        return response()->json($province);
     }
 
     /**
@@ -28,7 +27,14 @@ class ProvinceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $province=new Province;
+        $province->provincia=$request->provincia;
+        $province->save();
+        $data=[
+            'message'=>'la provincia ha sido creado',
+            'provincia'=>$province
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -52,7 +58,13 @@ class ProvinceController extends Controller
      */
     public function update(Request $request, Province $province)
     {
-        //
+        $province->provincia=$request->provincia;
+        $province->save();
+        $data=[
+            'message'=>'la provincia ha sido modificado',
+            'provincia'=>$province
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -60,6 +72,11 @@ class ProvinceController extends Controller
      */
     public function destroy(Province $province)
     {
-        //
+        $province->delete();
+        $data=[
+            'message'=>'la provincia ha sido eliminado',
+            'provincia'=>$faculty
+        ];
+        return response()->json($data);
     }
 }

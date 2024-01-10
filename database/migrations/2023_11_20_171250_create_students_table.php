@@ -44,10 +44,10 @@ return new class extends Migration
             $table->timestamps();
 
             $table->unsignedBigInteger('tipo_estudiante_id');
-            $table->foreign('tipo_estudiante_id')->references('id')->on('student_types');
+            $table->foreign('tipo_estudiante_id')->references('id')->on('student__types');
 
             $table->unsignedBigInteger('situacion_academica_id');
-            $table->foreign('situacion_academica_id')->references('id')->on('academic_states');
+            $table->foreign('situacion_academica_id')->references('id')->on('academic__states');
 
             $table->unsignedBigInteger('tipo_curso_id');
             $table->foreign('tipo_curso_id')->references('id')->on('courses');
@@ -56,7 +56,7 @@ return new class extends Migration
             $table->foreign('municipio_id')->references('id')->on('municipalities');
 
             $table->unsignedBigInteger('regimen_estudio_id');
-            $table->foreign('regimen_estudio_id')->references('id')->on('study_regimes');
+            $table->foreign('regimen_estudio_id')->references('id')->on('study__regimes');
 
             $table->unsignedBigInteger('facultad_id');
             $table->foreign('facultad_id')->references('id')->on('faculties');

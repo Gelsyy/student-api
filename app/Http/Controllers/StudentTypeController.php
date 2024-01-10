@@ -12,7 +12,8 @@ class StudentTypeController extends Controller
      */
     public function index()
     {
-        //
+        $student_type=Student_Type::all();
+            return response()->json($student_type);
     }
 
     /**
@@ -28,7 +29,14 @@ class StudentTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $student_type=new Student_Type;
+        $student_type->tipo_estudiante=$request->tipo_estudiante;
+        $student_type->save();
+        $data=[
+            'message'=>'EL TIPO DE ESTUDIANTE ha sido creado',
+            'TIPO_ESTUDIANTE'=>$student_type
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -52,7 +60,13 @@ class StudentTypeController extends Controller
      */
     public function update(Request $request, Student_Type $student_Type)
     {
-        //
+        $student_type->tipo_estudiante=$request->tipo_estudiante;
+        $student_type->save();
+        $data=[
+            'message'=>'el tipo de estudiante ha sido modificado',
+            'tipo de estudiante'=>$student_type
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -60,6 +74,11 @@ class StudentTypeController extends Controller
      */
     public function destroy(Student_Type $student_Type)
     {
-        //
+        $student_type->delete();
+        $data=[
+            'message'=>'el tipo de estudiante ha sido eliminado',
+            'tipo de estudiante'=>$student_type
+        ];
+        return response()->json($data);
     }
 }

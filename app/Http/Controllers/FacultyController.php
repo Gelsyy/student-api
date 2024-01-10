@@ -7,12 +7,13 @@ use Illuminate\Http\Request;
 
 class FacultyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
-        //
+        
+            $faculty=Faculty::all();
+            return response()->json($faculty);
+            
     }
 
     /**
@@ -28,7 +29,14 @@ class FacultyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $faculty=new Faculty;
+        $faculty->facultad=$request->facultad;
+        $faculty->save();
+        $data=[
+            'message'=>'la facultad ha sido creado',
+            'facultad'=>$faculty
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -52,14 +60,27 @@ class FacultyController extends Controller
      */
     public function update(Request $request, Faculty $faculty)
     {
-        //
+        $faculty->facultad=$request->facultad;
+        $faculty->save();
+        $data=[
+            'message'=>'la facultad ha sido modificado',
+            'facultad'=>$faculty
+        ];
+        return response()->json($data);
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Faculty $faculty)
-    {
-        //
+    { 
+        $faculty->delete();
+        $data=[
+            'message'=>'la facultad ha sido eliminado',
+            'facultad'=>$faculty
+        ];
+        return response()->json($data);
+
+    
     }
 }

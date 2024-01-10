@@ -12,7 +12,10 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        {
+            $course=Course::all();
+            return response()->json($course);
+            }
     }
 
     /**
@@ -28,7 +31,14 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $course=new Course;
+        $course->curso=$request->curso;
+        $course->save();
+        $data=[
+            'message'=>'el curso ha sido creado',
+            'curso'=>$course
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -52,7 +62,13 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
-        //
+        $course->curso=$request->curso;
+        $course->save();
+        $data=[
+            'message'=>'el curso ha sido modificado',
+            'curso'=>$course
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -60,6 +76,11 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        //
+        $course->delete();
+        $data=[
+            'message'=>'el curso ha sido eliminado',
+            'course'=>$course
+        ];
+        return response()->json($data);
     }
 }
