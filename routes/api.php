@@ -28,14 +28,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 // ruta para sacar estudiantes becados
-Route::get('/becado-students', [StudentController::class, 'getBecadoStudentsNames']);
+Route::get('/becado-students', [StudentController::class, 'getEstudianteBecado']);
 // ruta para sacar estudiantes por anno y grupo
-Route::get('/students/{annio}/{grupo}', [StudentController::class, 'getStudentsByYearAndGroup']);
-
-
+Route::get('/students/{annio}/{grupo}', [StudentController::class, 'getEstudianteGrupoAnnio']);
+// ruta estudiantes nuevo ingreso
+Route::get('/nuevo_ingreso', [StudentController::class, 'getNuevoIngreso']);
+// ruta que devuleve un estduiante por nombre y apellido
+Route::get('/student/{nombre}/{apellido}', [StudentController::class, 'getEstudianteNombreApellido']);
 
 // rutas de student
 Route::get('/student', [StudentController::class, 'index']);
+Route::post('/student', [StudentController::class, 'store']);
+//Route::put('/student/{student}', [CourseController::class, 'update']);
 Route::delete('/student/{student}', [StudentController::class, 'destroy']);
 
 
